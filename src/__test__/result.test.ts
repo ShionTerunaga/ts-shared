@@ -17,9 +17,11 @@ describe("resultUtility", () => {
 
     expect(ok.isOk).toBeTruthy();
 
-    if (ok.isOk) {
-      expect(ok.value).toBe("value");
+    if (ok.isErr) {
+      throw new Error("Expected to be Ok, but got Err");
     }
+
+    expect(ok.value).toBe("value");
   });
 
   it("createNg で作った値は isNG が true になる", () => {
@@ -27,9 +29,10 @@ describe("resultUtility", () => {
 
     expect(ng.isErr).toBeTruthy();
 
-    if (ng.isErr) {
-      expect(ng.err).toBe("err");
+    if (ng.isOk) {
+      throw new Error("Expected to be Err, but got Ok");
     }
+    expect(ng.err).toBe("err");
   });
 
   it("isOK は ok でない場合 false を返す", () => {
@@ -51,8 +54,11 @@ describe("resultUtility", () => {
     });
 
     expect(res.isOk).toBeTruthy();
+    if (res.isErr) {
+      throw new Error("Expected to be Ok, but got Err");
+    }
 
-    if (res.isOk) expect(res.value).toBe("ret");
+    expect(res.value).toBe("ret");
   });
 
   it("checkResultReturn は例外時に ng を返す", () => {
@@ -65,7 +71,11 @@ describe("resultUtility", () => {
 
     expect(res.isErr).toBeTruthy();
 
-    if (res.isErr) expect(res.err).toBe("myErr");
+    if (res.isOk) {
+      throw new Error("Expected to be Err, but got Ok");
+    }
+
+    expect(res.err).toBe("myErr");
   });
 
   it("checkResultReturn は成功時でも finalFn を呼ぶ", () => {
@@ -106,7 +116,11 @@ describe("resultUtility", () => {
 
     expect(res.isOk).toBeTruthy();
 
-    if (res.isOk) expect(res.value).toBe(UNIT);
+    if (res.isErr) {
+      throw new Error("Expected to be Ok, but got Err");
+    }
+
+    expect(res.value).toBe(UNIT);
   });
 
   it("checkResultVoid は成功時でも finalFn を呼ぶ", () => {
@@ -160,7 +174,11 @@ describe("resultUtility", () => {
 
     expect(res.isErr).toBeTruthy();
 
-    if (res.isErr) expect(res.err).toBe("err");
+    if (res.isOk) {
+      throw new Error("Expected to be Err, but got Ok");
+    }
+
+    expect(res.err).toBe("err");
   });
 
   it("checkPromiseReturn は解決時でも finalFn を呼ぶ", async () => {
@@ -201,7 +219,11 @@ describe("resultUtility", () => {
 
     expect(res.isOk).toBeTruthy();
 
-    if (res.isOk) expect(res.value).toBe(UNIT);
+    if (res.isErr) {
+      throw new Error("Expected to be Ok, but got Err");
+    }
+
+    expect(res.value).toBe(UNIT);
   });
 
   it("checkPromiseVoid は成功時でも finalFn を呼ぶ", async () => {

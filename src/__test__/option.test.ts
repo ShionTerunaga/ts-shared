@@ -8,9 +8,12 @@ describe("optionUtility", () => {
     const some = createSome("value");
 
     expect(some.isSome).toBeTruthy();
-    if (some.isSome) {
-      expect(some.value).toBe("value");
+
+    if (some.kind === "none") {
+      throw new Error("not expect");
     }
+
+    expect(some.value).toBe("value");
   });
 
   it("string型を与えたらSome型が返ってくる", () => {

@@ -68,6 +68,36 @@ describe("resultUtility", () => {
     if (res.isErr) expect(res.err).toBe("myErr");
   });
 
+  it("checkResultReturn は成功時でも finalFn を呼ぶ", () => {
+    let called = false;
+
+    checkResultReturn({
+      fn: () => "ret",
+      err: () => createNg("err"),
+      finalFn: () => {
+        called = true;
+      },
+    });
+
+    expect(called).toBeTruthy();
+  });
+
+  it("checkResultReturn は例外時でも finalFn を呼ぶ", () => {
+    let called = false;
+
+    checkResultReturn({
+      fn: () => {
+        throw new Error("boom");
+      },
+      err: () => createNg("err"),
+      finalFn: () => {
+        called = true;
+      },
+    });
+
+    expect(called).toBeTruthy();
+  });
+
   it("checkResultVoid は成功時に UNIT を返す", () => {
     const res = checkResultVoid({
       fn: () => {},
@@ -77,6 +107,36 @@ describe("resultUtility", () => {
     expect(res.isOk).toBeTruthy();
 
     if (res.isOk) expect(res.value).toBe(UNIT);
+  });
+
+  it("checkResultVoid は成功時でも finalFn を呼ぶ", () => {
+    let called = false;
+
+    checkResultVoid({
+      fn: () => {},
+      err: () => createNg("e"),
+      finalFn: () => {
+        called = true;
+      },
+    });
+
+    expect(called).toBeTruthy();
+  });
+
+  it("checkResultVoid は例外時でも finalFn を呼ぶ", () => {
+    let called = false;
+
+    checkResultVoid({
+      fn: () => {
+        throw new Error("boom");
+      },
+      err: () => createNg("e"),
+      finalFn: () => {
+        called = true;
+      },
+    });
+
+    expect(called).toBeTruthy();
   });
 
   it("checkPromiseReturn は解決時に ok を返す", async () => {
@@ -103,6 +163,36 @@ describe("resultUtility", () => {
     if (res.isErr) expect(res.err).toBe("err");
   });
 
+  it("checkPromiseReturn は解決時でも finalFn を呼ぶ", async () => {
+    let called = false;
+
+    await checkPromiseReturn({
+      fn: async () => "async",
+      err: () => createNg("e"),
+      finalFn: () => {
+        called = true;
+      },
+    });
+
+    expect(called).toBeTruthy();
+  });
+
+  it("checkPromiseReturn は拒否時でも finalFn を呼ぶ", async () => {
+    let called = false;
+
+    await checkPromiseReturn({
+      fn: async () => {
+        throw new Error("fail");
+      },
+      err: () => createNg("e"),
+      finalFn: () => {
+        called = true;
+      },
+    });
+
+    expect(called).toBeTruthy();
+  });
+
   it("checkPromiseVoid は成功時に UNIT を返す", async () => {
     const res = await checkPromiseVoid({
       fn: async () => {},
@@ -112,5 +202,35 @@ describe("resultUtility", () => {
     expect(res.isOk).toBeTruthy();
 
     if (res.isOk) expect(res.value).toBe(UNIT);
+  });
+
+  it("checkPromiseVoid は成功時でも finalFn を呼ぶ", async () => {
+    let called = false;
+
+    await checkPromiseVoid({
+      fn: async () => {},
+      err: () => createNg("e"),
+      finalFn: () => {
+        called = true;
+      },
+    });
+
+    expect(called).toBeTruthy();
+  });
+
+  it("checkPromiseVoid は拒否時でも finalFn を呼ぶ", async () => {
+    let called = false;
+
+    await checkPromiseVoid({
+      fn: async () => {
+        throw new Error("fail");
+      },
+      err: () => createNg("e"),
+      finalFn: () => {
+        called = true;
+      },
+    });
+
+    expect(called).toBeTruthy();
   });
 });

@@ -13,7 +13,7 @@ npm i github:ShionTerunaga/ts-common#release
 ## Usage
 
 ```ts
-import { optionUtility, resultUtility, createHttpError } from "ts-common";
+import { optionUtility, resultUtility } from "ts-common";
 ```
 
 The built files are committed to the `release` branch, so the package can be installed directly from this GitHub repository without running build scripts.

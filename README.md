@@ -16,7 +16,7 @@ npm i github:ShionTerunaga/ts-common#release
 import { optionUtility, resultUtility, createHttpError } from "ts-common";
 ```
 
-Type definitions are generated during `prepare`, so the package can be installed directly from the `release` branch of this GitHub repository.
+The built files are committed to the `release` branch, so the package can be installed directly from this GitHub repository without running build scripts.
 
 ## Development
 

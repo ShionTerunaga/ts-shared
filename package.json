@@ -27,7 +27,8 @@
     "build": "vp pack",
     "check": "vp check",
     "test": "vp test",
-    "prepare": "sh -c 'if [ -d .git ]; then vp exec lefthook install; fi; vp pack'"
+    "prepack": "vp pack",
+    "hooks:install": "vp exec lefthook install"
   },
   "devDependencies": {
     "@commitlint/cli": "catalog:",

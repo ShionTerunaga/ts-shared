@@ -16,7 +16,7 @@ npm i github:ShionTerunaga/ts-common#release
 import { optionUtility, resultUtility, createHttpError } from "ts-common";
 ```
 
-型定義は `prepare` 時に自動生成されるため、この GitHub リポジトリを直接インストールしてもそのまま利用できます。
+ビルド済みファイルを `release` ブランチに含めているため、ビルドスクリプトを実行せずにこの GitHub リポジトリを直接インストールできます。
 
 ## 開発
 

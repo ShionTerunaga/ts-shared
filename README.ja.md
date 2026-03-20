@@ -13,7 +13,7 @@ npm i github:ShionTerunaga/ts-common#release
 ## 使い方
 
 ```ts
-import { optionUtility, resultUtility, createHttpError } from "ts-common";
+import { optionUtility, resultUtility } from "ts-common";
 ```
 
 ビルド済みファイルを `release` ブランチに含めているため、ビルドスクリプトを実行せずにこの GitHub リポジトリを直接インストールできます。

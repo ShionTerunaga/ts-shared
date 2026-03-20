@@ -1,0 +1,9 @@
+pre-commit:
+  commands:
+    vite-staged:
+      run: vp staged
+
+commit-msg:
+  commands:
+    commitlint:
+      run: vp exec commitlint --edit {1}

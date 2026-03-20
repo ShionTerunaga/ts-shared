@@ -1,29 +1,28 @@
-# Vite+ Monorepo Starter
+# ts-common
 
-A starter for creating a Vite+ monorepo.
+Shared TypeScript utilities packaged from `packages/utils/src`.
+
+[日本語 README](./README.ja.md)
+
+## Install From GitHub
+
+```bash
+npm i github:ShionTerunaga/ts-common
+```
+
+## Usage
+
+```ts
+import { optionUtility, resultUtility, createHttpError } from "ts-common";
+```
+
+Type definitions are generated during `prepare`, so the package can be installed directly from this GitHub repository.
 
 ## Development
 
-- Check everything is ready:
-
 ```bash
-vp run ready
-```
-
-- Run the tests:
-
-```bash
-vp run test -r
-```
-
-- Build the monorepo:
-
-```bash
-vp run build -r
-```
-
-- Run the development server:
-
-```bash
-vp run dev
+vp install
+vp run ts-common-utils#check
+vp run ts-common-utils#test
+vp run ts-common-utils#build
 ```

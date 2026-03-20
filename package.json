@@ -1,10 +1,40 @@
 {
   "name": "ts-common",
   "version": "0.0.0",
-  "private": true,
+  "description": "Shared TypeScript utilities with generated type definitions.",
+  "homepage": "https://github.com/ShionTerunaga/ts-common#readme",
+  "bugs": {
+    "url": "https://github.com/ShionTerunaga/ts-common/issues"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ShionTerunaga/ts-common.git"
+  },
+  "files": [
+    "packages/utils/dist",
+    "README.md"
+  ],
   "type": "module",
-  "scripts": {},
+  "main": "./packages/utils/dist/index.mjs",
+  "types": "./packages/utils/dist/index.d.mts",
+  "exports": {
+    ".": {
+      "types": "./packages/utils/dist/index.d.mts",
+      "import": "./packages/utils/dist/index.mjs"
+    },
+    "./package.json": "./package.json"
+  },
+  "scripts": {
+    "build": "vp run ts-common-utils#build",
+    "check": "vp run ts-common-utils#check",
+    "test": "vp run ts-common-utils#test",
+    "prepare": "sh -c 'if [ -d .git ]; then vp exec lefthook install; fi; vp run ts-common-utils#build'"
+  },
   "devDependencies": {
+    "@commitlint/cli": "catalog:",
+    "@commitlint/config-conventional": "catalog:",
+    "lefthook": "catalog:",
     "vite-plus": "catalog:"
   },
   "engines": {

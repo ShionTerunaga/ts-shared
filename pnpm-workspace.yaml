@@ -3,14 +3,17 @@ packages:
   - packages/*
   - tools/*
 
-catalogMode: prefer
-
 catalog:
+  "@commitlint/cli": ^20.5.0
+  "@commitlint/config-conventional": ^20.5.0
   "@types/node": ^24
+  lefthook: ^2.1.4
   typescript: ^5
   vite: npm:@voidzero-dev/vite-plus-core@latest
-  vitest: npm:@voidzero-dev/vite-plus-test@latest
   vite-plus: latest
+  vitest: npm:@voidzero-dev/vite-plus-test@latest
+
+catalogMode: prefer
 overrides:
   vite: "catalog:"
   vitest: "catalog:"

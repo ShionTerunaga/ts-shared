@@ -1,21 +1,22 @@
 {
-  "name": "utils",
-  "version": "0.0.0",
-  "description": "A starter for creating a TypeScript package.",
-  "homepage": "https://github.com/author/library#readme",
+  "name": "ts-common-utils",
+  "version": "0.1.0",
+  "description": "Shared TypeScript utilities.",
+  "homepage": "https://github.com/ShionTerunaga/ts-common#readme",
   "bugs": {
-    "url": "https://github.com/author/library/issues"
+    "url": "https://github.com/ShionTerunaga/ts-common/issues"
   },
   "license": "MIT",
-  "author": "Author Name <author.name@mail.com>",
+  "author": "Shion Terunaga <sion2769@gmail.com>",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/author/library.git"
+    "url": "git+https://github.com/ShionTerunaga/ts-common.git"
   },
   "files": [
     "dist"
   ],
   "type": "module",
+  "types": "./dist/index.d.mts",
   "exports": {
     ".": "./dist/index.mjs",
     "./package.json": "./package.json"

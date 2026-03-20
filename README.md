@@ -7,7 +7,7 @@ Shared TypeScript utilities packaged from `packages/utils/src`.
 ## Install From GitHub
 
 ```bash
-npm i github:ShionTerunaga/ts-common
+npm i github:ShionTerunaga/ts-common#release
 ```
 
 ## Usage
@@ -16,7 +16,7 @@ npm i github:ShionTerunaga/ts-common
 import { optionUtility, resultUtility, createHttpError } from "ts-common";
 ```
 
-Type definitions are generated during `prepare`, so the package can be installed directly from this GitHub repository.
+Type definitions are generated during `prepare`, so the package can be installed directly from the `release` branch of this GitHub repository.
 
 ## Development
 

@@ -7,7 +7,7 @@
 ## GitHub からインストール
 
 ```bash
-npm i github:ShionTerunaga/ts-common
+npm i github:ShionTerunaga/ts-common#release
 ```
 
 ## 使い方

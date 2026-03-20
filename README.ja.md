@@ -18,6 +18,8 @@ import { optionUtility, resultUtility, createHttpError } from "ts-common";
 
 ビルド済みファイルを `release` ブランチに含めているため、ビルドスクリプトを実行せずにこの GitHub リポジトリを直接インストールできます。
 
+リポジトリ同梱の配布ファイルを更新する場合は、`vp pack` を手動実行して更新後の `dist/` をコミットしてから `release` に反映してください。
+
 ## 開発
 
 ```bash

@@ -18,6 +18,8 @@ import { optionUtility, resultUtility, createHttpError } from "ts-common";
 
 The built files are committed to the `release` branch, so the package can be installed directly from this GitHub repository without running build scripts.
 
+When updating the files shipped from the repository, run `vp pack` manually and commit the refreshed `dist/` output before merging into `release`.
+
 ## Development
 
 ```bash

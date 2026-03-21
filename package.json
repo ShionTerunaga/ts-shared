@@ -1,15 +1,15 @@
 {
-  "name": "ts-common",
+  "name": "ts-common-by-teru",
   "version": "0.0.0",
   "description": "Shared TypeScript utilities with generated type definitions.",
-  "homepage": "https://github.com/ShionTerunaga/ts-common#readme",
+  "homepage": "https://github.com/ShionTerunaga/ts-common-by-teru#readme",
   "bugs": {
-    "url": "https://github.com/ShionTerunaga/ts-common/issues"
+    "url": "https://github.com/ShionTerunaga/ts-common-by-teru/issues"
   },
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ShionTerunaga/ts-common.git"
+    "url": "git+https://github.com/ShionTerunaga/ts-common-by-teru.git"
   },
   "files": [
     "dist",

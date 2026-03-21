@@ -1,4 +1,4 @@
-# ts-common
+# ts-common-by-teru
 
 Shared TypeScript utilities packaged from `packages/utils/src`.
 

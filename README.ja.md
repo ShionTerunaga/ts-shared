@@ -1,4 +1,4 @@
-# ts-common
+# ts-common-by-teru
 
 `packages/utils/src` からパッケージ化された TypeScript の共通ユーティリティ集です。
 
@@ -7,7 +7,7 @@
 ## GitHub からインストール
 
 ```bash
-npm i github:ShionTerunaga/ts-common#release
+npm i github:ShionTerunaga/ts-common-by-teru#release
 ```
 
 ## 使い方

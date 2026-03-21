@@ -7,8 +7,7 @@ Shared TypeScript utilities packaged from `packages/utils/src`.
 ## Install From GitHub
 
 ```bash
-npm i github:ShionTerunaga/ts-common-by-teru
-#release
+npm i github:ShionTerunaga/ts-common-by-teru#release
 ```
 
 ## Usage

@@ -30,10 +30,10 @@
     "hooks:install": "vp exec lefthook install"
   },
   "devDependencies": {
-    "@commitlint/cli": "catalog:",
-    "@commitlint/config-conventional": "catalog:",
-    "lefthook": "catalog:",
-    "vite-plus": "catalog:"
+    "@commitlint/cli": "^20.5.0",
+    "@commitlint/config-conventional": "^20.5.0",
+    "lefthook": "^2.1.4",
+    "vite-plus": "latest"
   },
   "engines": {
     "node": ">=22.12.0"

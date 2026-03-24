@@ -18,8 +18,6 @@ import { optionUtility, resultUtility } from "ts-shared";
 
 ビルド済みファイルを `release` ブランチに含めているため、ビルドスクリプトを実行せずにこの GitHub リポジトリを直接インストールできます。
 
-リポジトリ同梱の配布ファイルを更新する場合は、`vp pack` を手動実行して更新後の `dist/` をコミットしてから `release` に反映してください。
-
 ## 開発
 
 ```bash
@@ -37,5 +35,5 @@ vp build
 vp run changeset
 ```
 
-`Release` GitHub Actions workflow が `main` 向けの version PR を自動で作成または更新します。その PR をマージすると、パッケージの version 更新、`dist/` の再ビルド、タグ作成、`release` ブランチ同期まで自動で実行されます。
+`Release PR` workflow が `main` から `release` への release PR を自動で作成または更新します。その PR を `release` にマージすると、`Publish Release` workflow が `dist/` の再ビルド、必要な配布ファイルの push、タグ作成、GitHub Release の作成または更新まで自動で実行します。
 生成される changelog の各項目には、元 PR へのリンクとコントリビュータの GitHub ユーザー名も含まれます。

@@ -1,15 +1,18 @@
 //#region src/utils/class-merger.ts
 function classMerger(classes) {
+  const length = classes.length;
+  if (length === 0) return "";
+  const firstClass = classes[0];
+  if (length === 1) return firstClass;
   const seen = /* @__PURE__ */ new Set();
   const out = [];
-  for (const cls of classes) {
-    if (cls === "") continue;
-    if (!seen.has(cls)) {
-      seen.add(cls);
-      out.push(cls);
-    }
+  for (let index = 0; index < length; index += 1) {
+    const cls = classes[index];
+    if (cls === "" || seen.has(cls)) continue;
+    seen.add(cls);
+    out.push(cls);
   }
-  return out.join(" ");
+  return out.length === 1 ? out[0] : out.join(" ");
 }
 //#endregion
 //#region src/utils/is.ts
@@ -91,34 +94,42 @@ const UNIT_SYMBOL = Symbol("UNIT_SYMBOL");
 const resultUtility = (function () {
   const { RESULT_NG, RESULT_OK } = basic;
   const UNIT = Object.freeze({ _unit: UNIT_SYMBOL });
-  const checkPromiseReturn = async ({ fn, err }) => {
+  const checkPromiseReturn = async ({ fn, err, finalFn = () => {} }) => {
     try {
       return createOk(await fn());
     } catch (e) {
       return err(e);
+    } finally {
+      finalFn();
     }
   };
-  const checkPromiseVoid = async ({ fn, err }) => {
+  const checkPromiseVoid = async ({ fn, err, finalFn = () => {} }) => {
     try {
       await fn();
       return createOk(UNIT);
     } catch (e) {
       return err(e);
+    } finally {
+      finalFn();
     }
   };
-  const checkResultReturn = ({ fn, err }) => {
+  const checkResultReturn = ({ fn, err, finalFn = () => {} }) => {
     try {
       return createOk(fn());
     } catch (e) {
       return err(e);
+    } finally {
+      finalFn();
     }
   };
-  const checkResultVoid = ({ fn, err }) => {
+  const checkResultVoid = ({ fn, err, finalFn = () => {} }) => {
     try {
       fn();
       return createOk(UNIT);
     } catch (e) {
       return err(e);
+    } finally {
+      finalFn();
     }
   };
   const createOk = (value) => {

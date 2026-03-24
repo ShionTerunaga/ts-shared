@@ -1,5 +1,5 @@
 //#region src/utils/class-merger.d.ts
-declare function classMerger(classes: Array<string>): string;
+declare function classMerger(classes: ReadonlyArray<string>): string;
 //#endregion
 //#region src/utils/option.d.ts
 declare const basic$1: {
@@ -21,7 +21,7 @@ type Option<T> = Some<NonNullable<T>> | None;
 declare const optionUtility: Readonly<{
   createSome: <T>(value: NonNullable<T>) => Option<T>;
   createNone: () => Option<never>;
-  optionConversion: <T extends {}>(value: T | null | undefined) => Option<T>;
+  optionConversion: <T extends NonNullable<unknown>>(value: T | null | undefined) => Option<T>;
 }>;
 //#endregion
 //#region src/utils/env-parse.d.ts
@@ -77,18 +77,22 @@ interface NG<E> {
 interface CheckResultReturn<T, E> {
   fn: () => NonNullable<T>;
   err: (e: unknown) => Result<never, NonNullable<E>>;
+  finalFn?: () => void;
 }
 interface CheckResultVoid<E> {
   fn: () => void;
   err: (e: unknown) => Result<never, NonNullable<E>>;
+  finalFn?: () => void;
 }
 interface CheckPromiseReturn<T, E> {
   fn: () => Promise<NonNullable<T>>;
   err: (e: unknown) => Result<never, NonNullable<E>>;
+  finalFn?: () => void;
 }
 interface CheckPromiseVoid<E> {
   fn: () => Promise<void>;
   err: (e: unknown) => Result<never, NonNullable<E>>;
+  finalFn?: () => void;
 }
 declare const UNIT_SYMBOL: unique symbol;
 interface Unit {
@@ -97,10 +101,14 @@ interface Unit {
 type Result<T, E> = OK<NonNullable<T>> | NG<NonNullable<E>>;
 declare const resultUtility: Readonly<{
   UNIT: Unit;
-  checkResultReturn: <T, E>({ fn, err }: CheckResultReturn<T, E>) => Result<T, E>;
-  checkResultVoid: <E>({ fn, err }: CheckResultVoid<E>) => Result<Unit, E>;
-  checkPromiseReturn: <T, E>({ fn, err }: CheckPromiseReturn<T, E>) => Promise<Result<T, E>>;
-  checkPromiseVoid: <E>({ fn, err }: CheckPromiseVoid<E>) => Promise<Result<Unit, E>>;
+  checkResultReturn: <T, E>({ fn, err, finalFn }: CheckResultReturn<T, E>) => Result<T, E>;
+  checkResultVoid: <E>({ fn, err, finalFn }: CheckResultVoid<E>) => Result<Unit, E>;
+  checkPromiseReturn: <T, E>({
+    fn,
+    err,
+    finalFn,
+  }: CheckPromiseReturn<T, E>) => Promise<Result<T, E>>;
+  checkPromiseVoid: <E>({ fn, err, finalFn }: CheckPromiseVoid<E>) => Promise<Result<Unit, E>>;
   createOk: <T>(value: NonNullable<T>) => Result<T, never>;
   createNg: <E>(err: NonNullable<E>) => Result<never, E>;
 }>;

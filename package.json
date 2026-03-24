@@ -1,6 +1,6 @@
 {
   "name": "ts-shared",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "description": "Shared TypeScript utilities with generated type definitions.",
   "homepage": "https://github.com/ShionTerunaga/ts-shared#readme",
   "bugs": {
@@ -29,7 +29,7 @@
     "test": "vp test",
     "changeset": "vp exec changeset",
     "version-packages": "vp exec changeset version",
-    "release:publish": "vp pack && node --experimental-strip-types ./scripts/publish-release-branch.ts",
+    "release:finalize": "vp pack && node --experimental-strip-types ./scripts/finalize-release.ts",
     "hooks:install": "vp exec lefthook install"
   },
   "devDependencies": {
@@ -37,6 +37,7 @@
     "@changesets/cli": "^2.30.0",
     "@commitlint/cli": "^20.5.0",
     "@commitlint/config-conventional": "^20.5.0",
+    "@typescript/native-preview": "7.0.0-dev.20260323.1",
     "lefthook": "^2.1.4",
     "vite-plus": "latest"
   },

@@ -1,0 +1,31 @@
+name: Sync Release
+
+on:
+  pull_request:
+    types:
+      - closed
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sync-release-${{ github.event.pull_request.number }}
+  cancel-in-progress: false
+
+jobs:
+  sync-release:
+    if: >
+      github.event.pull_request.merged == true &&
+      github.event.pull_request.head.ref == 'changeset-release/main'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout merged main
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: ${{ github.event.pull_request.merge_commit_sha }}
+
+      - name: Push merged release commit to release branch
+        run: git push origin HEAD:release --force-with-lease

@@ -35,5 +35,5 @@ vp build
 vp run changeset
 ```
 
-`Release PR` workflow が `main` から `release` への release PR を自動で作成または更新します。その PR を `release` にマージすると、`Publish Release` workflow が `dist/` の再ビルド、必要な配布ファイルの push、タグ作成、GitHub Release の作成または更新まで自動で実行します。
+`Release PR` workflow が Changesets の release PR を `main` 向けに自動で作成または更新します。その release PR ブランチ (`changeset-release/main`) が `main` にマージされると、`Sync Release` workflow がそのコミットを `release` に反映します。`release` 更新後は `Publish Release` workflow が `dist/` の再ビルド、必要な配布ファイルの push、タグ作成、GitHub Release の作成または更新まで自動で実行します。
 生成される changelog の各項目には、元 PR へのリンクとコントリビュータの GitHub ユーザー名も含まれます。

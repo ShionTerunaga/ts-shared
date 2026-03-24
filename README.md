@@ -35,5 +35,5 @@ Create a changeset for user-facing changes before opening or merging a PR.
 vp run changeset
 ```
 
-The `Release PR` workflow opens or updates a release PR from `main` into `release`. After that PR is merged into `release`, the `Publish Release` workflow rebuilds `dist/`, pushes the built artifacts if needed, and then creates or updates the Git tag and GitHub Release.
+The `Release PR` workflow opens or updates the Changesets release PR into `main`. When that release PR branch (`changeset-release/main`) is merged into `main`, the `Sync Release` workflow reflects the merged commit to `release`. After `release` is updated, the `Publish Release` workflow rebuilds `dist/`, pushes the built artifacts if needed, and then creates or updates the Git tag and GitHub Release.
 Each generated changelog item will also include the source PR and the contributor's GitHub username.

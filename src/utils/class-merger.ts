@@ -1,15 +1,25 @@
-export default function classMerger(classes: Array<string>): string {
+export default function classMerger(classes: ReadonlyArray<string>): string {
+  const length = classes.length;
+
+  if (length === 0) return "";
+
+  const firstClass = classes[0];
+
+  if (length === 1) {
+    return firstClass;
+  }
+
   const seen = new Set<string>();
   const out: string[] = [];
 
-  for (const cls of classes) {
-    if (cls === "") continue;
+  for (let index = 0; index < length; index += 1) {
+    const cls = classes[index];
 
-    if (!seen.has(cls)) {
-      seen.add(cls);
-      out.push(cls);
-    }
+    if (cls === "" || seen.has(cls)) continue;
+
+    seen.add(cls);
+    out.push(cls);
   }
 
-  return out.join(" ");
+  return out.length === 1 ? out[0] : out.join(" ");
 }

@@ -6,7 +6,7 @@ export default function classMerger(classes: ReadonlyArray<string>): string {
   const firstClass = classes[0];
 
   if (length === 1) {
-    return firstClass === "" ? "" : firstClass;
+    return firstClass;
   }
 
   const seen = new Set<string>();

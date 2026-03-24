@@ -28,3 +28,14 @@ vp check
 vp test
 vp build
 ```
+
+## リリースフロー
+
+ユーザー向けの変更を含む PR では、事前に changeset を作成してください。
+
+```bash
+vp run changeset
+```
+
+`Release` GitHub Actions workflow が `main` 向けの version PR を自動で作成または更新します。その PR をマージすると、パッケージの version 更新、`dist/` の再ビルド、タグ作成、`release` ブランチ同期まで自動で実行されます。
+生成される changelog の各項目には、元 PR へのリンクとコントリビュータの GitHub ユーザー名も含まれます。

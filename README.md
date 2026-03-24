@@ -28,3 +28,14 @@ vp check
 vp test
 vp build
 ```
+
+## Release Flow
+
+Create a changeset for user-facing changes before opening or merging a PR.
+
+```bash
+vp run changeset
+```
+
+The `Release` GitHub Actions workflow will open or update a version PR on `main`. After that PR is merged, the workflow versions the package, rebuilds `dist/`, tags the release, and syncs the `release` branch automatically.
+Each generated changelog item will also include the source PR and the contributor's GitHub username.

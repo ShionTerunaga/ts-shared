@@ -27,9 +27,14 @@
     "build": "vp pack",
     "check": "vp check",
     "test": "vp test",
+    "changeset": "vp exec changeset",
+    "version-packages": "vp exec changeset version",
+    "release:publish": "vp pack && node --experimental-strip-types ./scripts/publish-release-branch.ts",
     "hooks:install": "vp exec lefthook install"
   },
   "devDependencies": {
+    "@changesets/changelog-github": "^0.6.0",
+    "@changesets/cli": "^2.30.0",
     "@commitlint/cli": "^20.5.0",
     "@commitlint/config-conventional": "^20.5.0",
     "lefthook": "^2.1.4",

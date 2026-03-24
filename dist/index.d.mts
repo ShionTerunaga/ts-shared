@@ -48,14 +48,8 @@ type Without<T, K extends keyof T> = { [P in Exclude<keyof T, K>]: T[P] } & { [P
  * - `as` / `any` を使わず、型ガードでキーを検証します
  */
 declare function isKeyOf<T extends object>(key: PropertyKey, obj: T): key is keyof T;
-declare function isOmitObject<T extends object, S extends keyof T>(
-  currentObj: Dict<unknown>,
-  keys: S[],
-): currentObj is Omit<T, S>;
-declare function omitElementObject<T extends object, S extends keyof T>(
-  obj: T,
-  keys: S[],
-): Omit<T, S>;
+declare function isOmitObject<T extends object, S extends keyof T>(currentObj: Dict<unknown>, keys: S[]): currentObj is Omit<T, S>;
+declare function omitElementObject<T extends object, S extends keyof T>(obj: T, keys: S[]): Omit<T, S>;
 //#endregion
 //#region src/utils/result.d.ts
 declare const basic: {
@@ -101,30 +95,28 @@ interface Unit {
 type Result<T, E> = OK<NonNullable<T>> | NG<NonNullable<E>>;
 declare const resultUtility: Readonly<{
   UNIT: Unit;
-  checkResultReturn: <T, E>({ fn, err, finalFn }: CheckResultReturn<T, E>) => Result<T, E>;
-  checkResultVoid: <E>({ fn, err, finalFn }: CheckResultVoid<E>) => Result<Unit, E>;
+  checkResultReturn: <T, E>({
+    fn,
+    err,
+    finalFn
+  }: CheckResultReturn<T, E>) => Result<T, E>;
+  checkResultVoid: <E>({
+    fn,
+    err,
+    finalFn
+  }: CheckResultVoid<E>) => Result<Unit, E>;
   checkPromiseReturn: <T, E>({
     fn,
     err,
-    finalFn,
+    finalFn
   }: CheckPromiseReturn<T, E>) => Promise<Result<T, E>>;
-  checkPromiseVoid: <E>({ fn, err, finalFn }: CheckPromiseVoid<E>) => Promise<Result<Unit, E>>;
+  checkPromiseVoid: <E>({
+    fn,
+    err,
+    finalFn
+  }: CheckPromiseVoid<E>) => Promise<Result<Unit, E>>;
   createOk: <T>(value: NonNullable<T>) => Result<T, never>;
   createNg: <E>(err: NonNullable<E>) => Result<never, E>;
 }>;
 //#endregion
-export {
-  type Dict,
-  type Option,
-  type Result,
-  type Without,
-  classMerger,
-  envParse,
-  isKeyOf,
-  isNull,
-  isOmitObject,
-  isUndefined,
-  omitElementObject,
-  optionUtility,
-  resultUtility,
-};
+export { type Dict, type Option, type Result, type Without, classMerger, envParse, isKeyOf, isNull, isOmitObject, isUndefined, omitElementObject, optionUtility, resultUtility };

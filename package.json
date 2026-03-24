@@ -1,6 +1,6 @@
 {
   "name": "ts-shared",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Shared TypeScript utilities with generated type definitions.",
   "homepage": "https://github.com/ShionTerunaga/ts-shared#readme",
   "bugs": {

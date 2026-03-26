@@ -1,0 +1,55 @@
+name: バグ報告
+description: |
+  バグを報告するための Issue を作成します。再現手順、期待される動作、
+  実際の動作、実行環境の情報をできるだけ詳しく記載してください。
+title: "[BUG] "
+labels: [bug]
+assignees: []
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        バグ報告ありがとうございます。再現と調査をしやすくするため、以下の項目をできるだけ詳しく記入してください。
+  - type: input
+    id: summary
+    attributes:
+      label: 概要
+      description: 発生した問題を一文で簡潔に書いてください。
+      placeholder: '例: "createApp 実行時に TypeError が発生する"'
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: 再現手順
+      description: 問題を再現するための具体的な手順を順番に記載してください。
+      placeholder: |
+        1. リポジトリを clone する
+        2. `vp install` を実行する
+        3. `vp test` を実行する
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: 期待される動作
+      description: 本来どのような動作になるべきかを書いてください。
+      placeholder: '例: "ビルドが成功し、テストがすべて通る"'
+  - type: textarea
+    id: actual
+    attributes:
+      label: 実際の動作
+      description: 実際に起きたことを、エラーメッセージやスタックトレースを含めて記載してください。
+      placeholder: エラー出力やスタックトレースをここに貼り付けてください。
+  - type: input
+    id: environment
+    attributes:
+      label: 環境
+      description: OS、Node.js のバージョン、使用しているパッケージ管理情報などを記載してください。
+      placeholder: '例: "macOS 14.0, Node 20.10.0, pnpm 8.0.0"'
+  - type: textarea
+    id: additional
+    attributes:
+      label: 補足情報
+      description: ログ、スクリーンショット、関連 Issue、CI の失敗リンクなどがあれば記載してください。

@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vite-plus/test";
-import { resultUtility } from "@/utils/result";
+import { resultUtility } from "@/non-nullable/result";
 
 describe("resultUtility", () => {
   const {

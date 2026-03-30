@@ -1,5 +1,3 @@
-import { isNull, isUndefined } from "./is.ts";
-
 const basic = {
   OPTION_SOME: "some",
   OPTION_NONE: "none",
@@ -40,10 +38,8 @@ export const optionUtility = (function () {
     });
   };
 
-  const optionConversion = <T extends NonNullable<unknown>>(
-    value: T | null | undefined,
-  ): Option<T> => {
-    if (isNull(value) || isUndefined(value)) {
+  const optionConversion = <T>(value: T): Option<T> => {
+    if (value === null || value === undefined) {
       return createNone();
     }
 

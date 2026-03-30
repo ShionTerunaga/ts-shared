@@ -1,4 +1,4 @@
-import { envParse } from "@/utils/env-parse";
+import { envParse } from "@/non-nullable/env-parse";
 import { describe, expect, it } from "vite-plus/test";
 
 describe("env-parse", () => {

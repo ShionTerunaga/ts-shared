@@ -3,6 +3,7 @@ import { tmpdir } from "node:os";
 import { dirname, join, resolve } from "node:path";
 import { execFileSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
+import { parseLatestReleaseNotes } from "./release-notes.ts";
 
 const scriptDir = dirname(fileURLToPath(import.meta.url));
 const repoRoot = resolve(scriptDir, "..");
@@ -48,17 +49,18 @@ const packageJson = JSON.parse(readFileSync(join(repoRoot, "package.json"), "utf
   version: string;
 };
 const changelog = readFileSync(join(repoRoot, "CHANGELOG.md"), "utf8");
+const latestRelease = parseLatestReleaseNotes(changelog);
 const version = packageJson.version;
 const tag = `v${version}`;
-
-const releaseHeader = new RegExp(
-  `##\\s+${version.replaceAll(".", "\\.")}\\b([\\s\\S]*?)(?=\\n##\\s|$)`,
-);
-const match = changelog.match(releaseHeader);
-const releaseNotes = (match?.[0] ?? `## ${version}`).trim();
 const notesPath = join(tempDir, "release-notes.md");
 
-writeFileSync(notesPath, releaseNotes);
+if (latestRelease.version !== version) {
+  throw new Error(
+    `package.json version (${version}) does not match the latest CHANGELOG.md section (${latestRelease.version})`,
+  );
+}
+
+writeFileSync(notesPath, latestRelease.notes);
 
 run("git", ["config", "user.name", gitUserName]);
 run("git", ["config", "user.email", gitUserEmail]);

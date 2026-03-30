@@ -1,7 +1,37 @@
-//#region src/utils/class-merger.d.ts
+//#region src/merger/class-merger.d.ts
 declare function classMerger(classes: ReadonlyArray<string>): string;
 //#endregion
-//#region src/utils/option.d.ts
+//#region src/common/is.d.ts
+declare function isNull(value: unknown): value is null;
+declare function isUndefined(value: unknown): value is undefined;
+//#endregion
+//#region src/types/object.d.ts
+/**
+ * 柔軟なオブジェクト
+ */
+type Dict<T> = Record<string, T>;
+/**
+ * Omitよりも厳密に型をチェックする(Omitは余計なプロパティを許容してしまう)
+ */
+type Without<T, K extends keyof T> = { [P in Exclude<keyof T, K>]: T[P] } & { [P in K]?: never };
+//#endregion
+//#region src/object/object.d.ts
+/**
+ * オブジェクトから要素を省く関数（非破壊）
+ * - 元オブジェクトは変更しません
+ * - `as` / `any` を使わず、型ガードでキーを検証します
+ */
+declare function isKeyOf<T extends object>(key: PropertyKey, obj: T): key is keyof T;
+declare function isOmitObject<T extends object, S extends keyof T>(
+  currentObj: Dict<unknown>,
+  keys: S[],
+): currentObj is Omit<T, S>;
+declare function omitElementObject<T extends object, S extends keyof T>(
+  obj: T,
+  keys: S[],
+): Omit<T, S>;
+//#endregion
+//#region src/non-nullable/option.d.ts
 declare const basic$1: {
   readonly OPTION_SOME: "some";
   readonly OPTION_NONE: "none";
@@ -21,43 +51,13 @@ type Option<T> = Some<NonNullable<T>> | None;
 declare const optionUtility: Readonly<{
   createSome: <T>(value: NonNullable<T>) => Option<T>;
   createNone: () => Option<never>;
-  optionConversion: <T extends NonNullable<unknown>>(value: T | null | undefined) => Option<T>;
+  optionConversion: <T>(value: T) => Option<T>;
 }>;
 //#endregion
-//#region src/utils/env-parse.d.ts
+//#region src/non-nullable/env-parse.d.ts
 declare function envParse(env: string | undefined): Option<string>;
 //#endregion
-//#region src/utils/is.d.ts
-declare function isNull(value: unknown): value is null;
-declare function isUndefined(value: unknown): value is undefined;
-//#endregion
-//#region src/types/object.d.ts
-/**
- * 柔軟なオブジェクト
- */
-type Dict<T> = Record<string, T>;
-/**
- * Omitよりも厳密に型をチェックする(Omitは余計なプロパティを許容してしまう)
- */
-type Without<T, K extends keyof T> = { [P in Exclude<keyof T, K>]: T[P] } & { [P in K]?: never };
-//#endregion
-//#region src/utils/object.d.ts
-/**
- * オブジェクトから要素を省く関数（非破壊）
- * - 元オブジェクトは変更しません
- * - `as` / `any` を使わず、型ガードでキーを検証します
- */
-declare function isKeyOf<T extends object>(key: PropertyKey, obj: T): key is keyof T;
-declare function isOmitObject<T extends object, S extends keyof T>(
-  currentObj: Dict<unknown>,
-  keys: S[],
-): currentObj is Omit<T, S>;
-declare function omitElementObject<T extends object, S extends keyof T>(
-  obj: T,
-  keys: S[],
-): Omit<T, S>;
-//#endregion
-//#region src/utils/result.d.ts
+//#region src/non-nullable/result.d.ts
 declare const basic: {
   readonly RESULT_OK: "ok";
   readonly RESULT_NG: "ng";

@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vite-plus/test";
-import { resultUtility } from "@/non-nullable/result";
+import { resultUtility } from "ts-shared";
 
 describe("resultUtility", () => {
   const {

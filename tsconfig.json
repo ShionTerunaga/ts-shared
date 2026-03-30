@@ -5,7 +5,7 @@
     "module": "preserve",
     "moduleResolution": "bundler",
     "paths": {
-      "@/*": ["./src/*"]
+      "ts-shared": ["./src/*"]
     },
     "types": ["node"],
     "allowImportingTsExtensions": true,
@@ -14,5 +14,5 @@
     "strict": true,
     "skipLibCheck": true
   },
-  "include": ["src", "scripts", "vite.config.ts", "commitlint.config.mjs"]
+  "include": ["src", "scripts", "vite.config.ts", "commitlint.config.mjs", "__test__"]
 }

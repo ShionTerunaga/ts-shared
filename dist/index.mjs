@@ -1,4 +1,4 @@
-//#region src/utils/class-merger.ts
+//#region src/merger/class-merger.ts
 function classMerger(classes) {
   const length = classes.length;
   if (length === 0) return "";
@@ -15,7 +15,7 @@ function classMerger(classes) {
   return out.length === 1 ? out[0] : out.join(" ");
 }
 //#endregion
-//#region src/utils/is.ts
+//#region src/common/is.ts
 function isNull(value) {
   return value === null;
 }
@@ -23,46 +23,7 @@ function isUndefined(value) {
   return value === void 0;
 }
 //#endregion
-//#region src/utils/option.ts
-const basic$1 = {
-  OPTION_SOME: "some",
-  OPTION_NONE: "none",
-};
-const optionUtility = (function () {
-  const { OPTION_SOME, OPTION_NONE } = basic$1;
-  const createSome = (value) => {
-    return Object.freeze({
-      kind: OPTION_SOME,
-      isSome: true,
-      isNone: false,
-      value,
-    });
-  };
-  const createNone = () => {
-    return Object.freeze({
-      kind: OPTION_NONE,
-      isSome: false,
-      isNone: true,
-    });
-  };
-  const optionConversion = (value) => {
-    if (isNull(value) || isUndefined(value)) return createNone();
-    return createSome(value);
-  };
-  return Object.freeze({
-    createSome,
-    createNone,
-    optionConversion,
-  });
-})();
-//#endregion
-//#region src/utils/env-parse.ts
-function envParse(env) {
-  const { optionConversion } = optionUtility;
-  return optionConversion(env);
-}
-//#endregion
-//#region src/utils/object.ts
+//#region src/object/object.ts
 /**
  * オブジェクトから要素を省く関数（非破壊）
  * - 元オブジェクトは変更しません
@@ -85,7 +46,46 @@ function omitElementObject(obj, keys) {
   return typedResult;
 }
 //#endregion
-//#region src/utils/result.ts
+//#region src/non-nullable/option.ts
+const basic$1 = {
+  OPTION_SOME: "some",
+  OPTION_NONE: "none",
+};
+const optionUtility = (function () {
+  const { OPTION_SOME, OPTION_NONE } = basic$1;
+  const createSome = (value) => {
+    return Object.freeze({
+      kind: OPTION_SOME,
+      isSome: true,
+      isNone: false,
+      value,
+    });
+  };
+  const createNone = () => {
+    return Object.freeze({
+      kind: OPTION_NONE,
+      isSome: false,
+      isNone: true,
+    });
+  };
+  const optionConversion = (value) => {
+    if (value === null || value === void 0) return createNone();
+    return createSome(value);
+  };
+  return Object.freeze({
+    createSome,
+    createNone,
+    optionConversion,
+  });
+})();
+//#endregion
+//#region src/non-nullable/env-parse.ts
+function envParse(env) {
+  const { optionConversion } = optionUtility;
+  return optionConversion(env);
+}
+//#endregion
+//#region src/non-nullable/result.ts
 const basic = {
   RESULT_OK: "ok",
   RESULT_NG: "ng",

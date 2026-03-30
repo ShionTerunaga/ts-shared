@@ -1,4 +1,4 @@
-import type { Dict } from "@/types/object";
+import type { Dict } from "../types/object";
 
 /**
  * オブジェクトから要素を省く関数（非破壊）

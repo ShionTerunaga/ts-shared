@@ -1,4 +1,4 @@
-import { envParse } from "@/non-nullable/env-parse";
+import { envParse } from "ts-shared";
 import { describe, expect, it } from "vite-plus/test";
 
 describe("env-parse", () => {

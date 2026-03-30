@@ -1,4 +1,4 @@
-export { default as classMerger } from "./merger/class-merger";
+export { classMerger } from "./merger/class-merger";
 export { isNull, isUndefined } from "./common/is";
 export { isKeyOf, isOmitObject, omitElementObject } from "./object/object";
 export { envParse } from "./non-nullable/env-parse";

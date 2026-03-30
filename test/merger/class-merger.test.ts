@@ -1,4 +1,4 @@
-import classMerger from "@/merger/class-merger";
+import { classMerger } from "ts-shared";
 import { describe, expect, it } from "vite-plus/test";
 
 describe("class-merger", () => {

@@ -1,4 +1,4 @@
-export default function classMerger(classes: ReadonlyArray<string>): string {
+export function classMerger(classes: ReadonlyArray<string>): string {
   const length = classes.length;
 
   if (length === 0) return "";

@@ -1,4 +1,4 @@
-import { omitElementObject } from "@/object/object";
+import { omitElementObject } from "ts-shared";
 import { describe, expect, it } from "vite-plus/test";
 
 describe("object", () => {

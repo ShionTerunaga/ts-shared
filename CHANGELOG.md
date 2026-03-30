@@ -1,5 +1,11 @@
 # ts-shared
 
+## 1.0.1
+
+### Patch Changes
+
+- [`8212114`](https://github.com/ShionTerunaga/ts-shared/commit/8212114581959733af4e55670e134eef085db674) Thanks [@ShionTerunaga](https://github.com/ShionTerunaga)! - Change the import of `classMerger` to a named import
+
 ## 1.0.0
 
 ### Major Changes

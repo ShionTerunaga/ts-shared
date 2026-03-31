@@ -7,18 +7,26 @@ export interface BaseErrorOptions {
 }
 
 export class BaseError extends Error {
-  cause?: unknown;
-  code?: string;
-  details?: unknown;
+  declare cause?: unknown;
+  declare code?: string;
+  declare details?: unknown;
 
   constructor(options: BaseErrorOptions = {}) {
     const { cause, code, details, message = "Application Error", name = "BaseError" } = options;
 
-    super(message);
+    super(message, cause === undefined ? undefined : { cause });
 
     this.name = name;
     this.code = code;
     this.details = details;
-    this.cause = cause;
+
+    if (cause !== undefined && !("cause" in this)) {
+      Object.defineProperty(this, "cause", {
+        configurable: true,
+        enumerable: false,
+        value: cause,
+        writable: true,
+      });
+    }
   }
 }

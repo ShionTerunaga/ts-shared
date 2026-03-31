@@ -11,7 +11,7 @@ export class BaseHttpError extends BaseError {
   status: number;
   statusText: string;
 
-  constructor(options: HttpErrorOptions) {
+  constructor(options: HttpErrorOptions = {}) {
     const {
       cause,
       code,

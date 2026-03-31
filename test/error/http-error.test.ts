@@ -21,7 +21,7 @@ import {
   UnauthorizedError,
   UnprocessableEntityError,
   UnsupportedMediaTypeError,
-} from "../../src/error/http-error";
+} from "ts-shared";
 import { describe, expect, it } from "vite-plus/test";
 
 describe("BaseHttpError", () => {

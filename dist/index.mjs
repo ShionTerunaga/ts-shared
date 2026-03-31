@@ -17,16 +17,19 @@ function classMerger(classes) {
 //#endregion
 //#region src/error/base-error.ts
 var BaseError = class extends Error {
-  cause;
-  code;
-  details;
   constructor(options = {}) {
     const { cause, code, details, message = "Application Error", name = "BaseError" } = options;
-    super(message);
+    super(message, cause === void 0 ? void 0 : { cause });
     this.name = name;
     this.code = code;
     this.details = details;
-    this.cause = cause;
+    if (cause !== void 0 && !("cause" in this))
+      Object.defineProperty(this, "cause", {
+        configurable: true,
+        enumerable: false,
+        value: cause,
+        writable: true,
+      });
   }
 };
 //#endregion
@@ -35,7 +38,7 @@ var BaseHttpError = class extends BaseError {
   expose;
   status;
   statusText;
-  constructor(options) {
+  constructor(options = {}) {
     const {
       cause,
       code,

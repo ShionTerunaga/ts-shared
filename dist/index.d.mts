@@ -10,9 +10,9 @@ interface BaseErrorOptions {
   name?: string;
 }
 declare class BaseError extends Error {
-  readonly cause?: unknown;
-  readonly code?: string;
-  readonly details?: unknown;
+  cause?: unknown;
+  code?: string;
+  details?: unknown;
   constructor(options?: BaseErrorOptions);
 }
 //#endregion
@@ -23,10 +23,10 @@ interface HttpErrorOptions extends BaseErrorOptions {
   statusText?: string;
 }
 declare class BaseHttpError extends BaseError {
-  readonly expose: boolean;
-  readonly status: number;
-  readonly statusText: string;
-  constructor(options: HttpErrorOptions);
+  expose: boolean;
+  status: number;
+  statusText: string;
+  constructor(options?: HttpErrorOptions);
 }
 declare class UnauthorizedError extends BaseHttpError {
   constructor(options?: HttpErrorOptions);

@@ -2,4 +2,4 @@
 "ts-shared": minor
 ---
 
-Add an error class
+Add reusable error classes (BaseError, HTTP errors, SchemeError, ValidationError)

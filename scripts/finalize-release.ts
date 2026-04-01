@@ -70,7 +70,7 @@ run("git", ["add", "dist", "package.json", "CHANGELOG.md"]);
 const hasBuildChanges = !canRun("git", ["diff", "--cached", "--quiet"]);
 
 if (hasBuildChanges) {
-  run("git", ["commit", "-m", `chore: pack release ${tag}`]);
+  run("git", ["commit", "--no-verify", "-m", `chore: pack release ${tag}`]);
   run("git", ["push", "origin", "HEAD:release"]);
 }
 

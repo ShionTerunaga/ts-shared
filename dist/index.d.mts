@@ -1,6 +1,123 @@
 //#region src/merger/class-merger.d.ts
 declare function classMerger(classes: ReadonlyArray<string>): string;
 //#endregion
+//#region src/error/base-error.d.ts
+interface BaseErrorOptions {
+  cause?: unknown;
+  code?: string;
+  details?: unknown;
+  message?: string;
+  name?: string;
+}
+declare class BaseError extends Error {
+  cause?: unknown;
+  code?: string;
+  details?: unknown;
+  constructor(options?: BaseErrorOptions);
+}
+//#endregion
+//#region src/error/http-error.d.ts
+interface HttpErrorOptions extends BaseErrorOptions {
+  expose?: boolean;
+  status?: number;
+  statusText?: string;
+}
+declare class BaseHttpError extends BaseError {
+  expose: boolean;
+  status: number;
+  statusText: string;
+  constructor(options?: HttpErrorOptions);
+}
+declare class UnauthorizedError extends BaseHttpError {
+  constructor(options?: HttpErrorOptions);
+}
+declare class BadRequestError extends BaseHttpError {
+  constructor(options?: HttpErrorOptions);
+}
+declare class PaymentRequiredError extends BaseHttpError {
+  constructor(options?: HttpErrorOptions);
+}
+declare class ForbiddenError extends BaseHttpError {
+  constructor(options?: HttpErrorOptions);
+}
+declare class MethodNotAllowedError extends BaseHttpError {
+  constructor(options?: HttpErrorOptions);
+}
+declare class NotAcceptableError extends BaseHttpError {
+  constructor(options?: HttpErrorOptions);
+}
+declare class ProxyAuthenticationRequiredError extends BaseHttpError {
+  constructor(options?: HttpErrorOptions);
+}
+declare class NotFoundError extends BaseHttpError {
+  constructor(options?: HttpErrorOptions);
+}
+declare class ConflictError extends BaseHttpError {
+  constructor(options?: HttpErrorOptions);
+}
+declare class GoneError extends BaseHttpError {
+  constructor(options?: HttpErrorOptions);
+}
+declare class PreconditionFailedError extends BaseHttpError {
+  constructor(options?: HttpErrorOptions);
+}
+declare class PayloadTooLargeError extends BaseHttpError {
+  constructor(options?: HttpErrorOptions);
+}
+declare class UnsupportedMediaTypeError extends BaseHttpError {
+  constructor(options?: HttpErrorOptions);
+}
+declare class UnprocessableEntityError extends BaseHttpError {
+  constructor(options?: HttpErrorOptions);
+}
+declare class TooManyRequestsError extends BaseHttpError {
+  constructor(options?: HttpErrorOptions);
+}
+declare class TimeoutError extends BaseHttpError {
+  constructor(options?: HttpErrorOptions);
+}
+declare class InternalServerError extends BaseHttpError {
+  constructor(options?: HttpErrorOptions);
+}
+declare class NotImplementedError extends BaseHttpError {
+  constructor(options?: HttpErrorOptions);
+}
+declare class BadGatewayError extends BaseHttpError {
+  constructor(options?: HttpErrorOptions);
+}
+declare class ServiceUnavailableError extends BaseHttpError {
+  constructor(options?: HttpErrorOptions);
+}
+declare class GatewayTimeoutError extends BaseHttpError {
+  constructor(options?: HttpErrorOptions);
+}
+//#endregion
+//#region src/error/scheme-error.d.ts
+interface SchemeErrorOptions extends BaseErrorOptions {
+  allowedSchemes?: string[];
+  receivedScheme?: string;
+}
+declare class SchemeError extends BaseError {
+  readonly allowedSchemes: string[];
+  readonly receivedScheme?: string;
+  constructor(options?: SchemeErrorOptions);
+}
+//#endregion
+//#region src/error/validation-error.d.ts
+interface ValidationIssue {
+  message: string;
+  path?: string;
+}
+interface ValidationErrorOptions extends BaseErrorOptions {
+  field?: string;
+  issues?: ValidationIssue[];
+}
+declare class ValidationError extends BaseError {
+  readonly field?: string;
+  readonly issues: ValidationIssue[];
+  constructor(options?: ValidationErrorOptions);
+}
+//#endregion
 //#region src/common/is.d.ts
 declare function isNull(value: unknown): value is null;
 declare function isUndefined(value: unknown): value is undefined;
@@ -114,9 +231,39 @@ declare const resultUtility: Readonly<{
 }>;
 //#endregion
 export {
+  BadGatewayError,
+  BadRequestError,
+  BaseError,
+  type BaseErrorOptions,
+  BaseHttpError,
+  ConflictError,
   type Dict,
+  ForbiddenError,
+  GatewayTimeoutError,
+  GoneError,
+  type HttpErrorOptions,
+  InternalServerError,
+  MethodNotAllowedError,
+  NotAcceptableError,
+  NotFoundError,
+  NotImplementedError,
   type Option,
+  PayloadTooLargeError,
+  PaymentRequiredError,
+  PreconditionFailedError,
+  ProxyAuthenticationRequiredError,
   type Result,
+  SchemeError,
+  type SchemeErrorOptions,
+  ServiceUnavailableError,
+  TimeoutError,
+  TooManyRequestsError,
+  UnauthorizedError,
+  UnprocessableEntityError,
+  UnsupportedMediaTypeError,
+  ValidationError,
+  type ValidationErrorOptions,
+  type ValidationIssue,
   type Without,
   classMerger,
   envParse,

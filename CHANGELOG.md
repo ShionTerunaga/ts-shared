@@ -1,5 +1,11 @@
 # ts-shared
 
+## 1.0.2
+
+### Patch Changes
+
+- [`ab380fa`](https://github.com/ShionTerunaga/ts-shared/commit/ab380fa2681ca221a7fdb2465bf1af5d3ed2b965) Thanks [@ShionTerunaga](https://github.com/ShionTerunaga)! - Update the version of the dependency package
+
 ## 1.0.1
 
 ### Patch Changes

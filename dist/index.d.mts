@@ -57,23 +57,26 @@ declare const optionUtility: Readonly<{
 //#region src/non-nullable/env-parse.d.ts
 declare function envParse(env: string | undefined): Option<string>;
 //#endregion
-//#region src/non-nullable/result.d.ts
+//#region src/non-nullable/result/result-core.d.ts
 declare const basic: {
   readonly RESULT_OK: "ok";
   readonly RESULT_NG: "ng";
 };
 interface OK<T> {
   readonly kind: typeof basic.RESULT_OK;
-  readonly isOk: true;
-  readonly isErr: false;
   readonly value: T;
 }
-interface NG<E> {
+interface Err<E> {
   readonly kind: typeof basic.RESULT_NG;
-  readonly isOk: false;
-  readonly isErr: true;
   readonly err: E;
 }
+type Result<T, E> = OK<NonNullable<T>> | Err<NonNullable<E>>;
+declare function createOk<T>(value: NonNullable<T>): Result<T, never>;
+declare function createErr<E>(err: NonNullable<E>): Result<never, E>;
+declare function isOk<T, E>(result: Result<T, E>): result is OK<NonNullable<T>>;
+declare function isErr<T, E>(result: Result<T, E>): result is Err<NonNullable<E>>;
+//#endregion
+//#region src/non-nullable/result/result-process.d.ts
 interface CheckResultReturn<T, E> {
   fn: () => NonNullable<T>;
   err: (e: unknown) => Result<never, NonNullable<E>>;
@@ -98,33 +101,44 @@ declare const UNIT_SYMBOL: unique symbol;
 interface Unit {
   readonly _unit: typeof UNIT_SYMBOL;
 }
-type Result<T, E> = OK<NonNullable<T>> | NG<NonNullable<E>>;
-declare const resultUtility: Readonly<{
-  UNIT: Unit;
-  checkResultReturn: <T, E>({ fn, err, finalFn }: CheckResultReturn<T, E>) => Result<T, E>;
-  checkResultVoid: <E>({ fn, err, finalFn }: CheckResultVoid<E>) => Result<Unit, E>;
-  checkPromiseReturn: <T, E>({
-    fn,
-    err,
-    finalFn,
-  }: CheckPromiseReturn<T, E>) => Promise<Result<T, E>>;
-  checkPromiseVoid: <E>({ fn, err, finalFn }: CheckPromiseVoid<E>) => Promise<Result<Unit, E>>;
-  createOk: <T>(value: NonNullable<T>) => Result<T, never>;
-  createNg: <E>(err: NonNullable<E>) => Result<never, E>;
-}>;
+declare const UNIT: Unit;
+declare const checkPromiseVoid: <E>({
+  fn,
+  err,
+  finalFn,
+}: CheckPromiseVoid<E>) => Promise<Result<Unit, E>>;
+declare const checkResultReturn: <T, E>({
+  fn,
+  err,
+  finalFn,
+}: CheckResultReturn<T, E>) => Result<T, E>;
+declare const checkResultVoid: <E>({ fn, err, finalFn }: CheckResultVoid<E>) => Result<Unit, E>;
+declare const checkPromiseReturn: <T, E>({
+  fn,
+  err,
+  finalFn,
+}: CheckPromiseReturn<T, E>) => Promise<Result<T, E>>;
 //#endregion
 export {
   type Dict,
   type Option,
-  type Result,
+  Result,
+  UNIT,
   type Without,
+  checkPromiseReturn,
+  checkPromiseVoid,
+  checkResultReturn,
+  checkResultVoid,
   classMerger,
+  createErr,
+  createOk,
   envParse,
+  isErr,
   isKeyOf,
   isNull,
+  isOk,
   isOmitObject,
   isUndefined,
   omitElementObject,
   optionUtility,
-  resultUtility,
 };

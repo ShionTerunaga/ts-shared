@@ -85,88 +85,85 @@ function envParse(env) {
   return optionConversion(env);
 }
 //#endregion
-//#region src/non-nullable/result.ts
+//#region src/non-nullable/result/result-core.ts
 const basic = {
   RESULT_OK: "ok",
   RESULT_NG: "ng",
 };
-const UNIT_SYMBOL = Symbol("UNIT_SYMBOL");
-const resultUtility = (function () {
-  const { RESULT_NG, RESULT_OK } = basic;
-  const UNIT = Object.freeze({ _unit: UNIT_SYMBOL });
-  const checkPromiseReturn = async ({ fn, err, finalFn = () => {} }) => {
-    try {
-      return createOk(await fn());
-    } catch (e) {
-      return err(e);
-    } finally {
-      finalFn();
-    }
+function createOk(value) {
+  return {
+    kind: basic.RESULT_OK,
+    value,
   };
-  const checkPromiseVoid = async ({ fn, err, finalFn = () => {} }) => {
-    try {
-      await fn();
-      return createOk(UNIT);
-    } catch (e) {
-      return err(e);
-    } finally {
-      finalFn();
-    }
+}
+function createErr(err) {
+  return {
+    kind: basic.RESULT_NG,
+    err,
   };
-  const checkResultReturn = ({ fn, err, finalFn = () => {} }) => {
-    try {
-      return createOk(fn());
-    } catch (e) {
-      return err(e);
-    } finally {
-      finalFn();
-    }
-  };
-  const checkResultVoid = ({ fn, err, finalFn = () => {} }) => {
-    try {
-      fn();
-      return createOk(UNIT);
-    } catch (e) {
-      return err(e);
-    } finally {
-      finalFn();
-    }
-  };
-  const createOk = (value) => {
-    return Object.freeze({
-      kind: RESULT_OK,
-      isOk: true,
-      isErr: false,
-      value,
-    });
-  };
-  const createNg = (err) => {
-    return Object.freeze({
-      kind: RESULT_NG,
-      isOk: false,
-      isErr: true,
-      err,
-    });
-  };
-  return Object.freeze({
-    UNIT,
-    checkResultReturn,
-    checkResultVoid,
-    checkPromiseReturn,
-    checkPromiseVoid,
-    createOk,
-    createNg,
-  });
-})();
+}
+function isOk(result) {
+  return result.kind === basic.RESULT_OK;
+}
+function isErr(result) {
+  return result.kind === basic.RESULT_NG;
+}
+const UNIT = Object.freeze({ _unit: Symbol("UNIT_SYMBOL") });
+const checkPromiseVoid = async ({ fn, err, finalFn = () => {} }) => {
+  try {
+    await fn();
+    return createOk(UNIT);
+  } catch (e) {
+    return err(e);
+  } finally {
+    finalFn();
+  }
+};
+const checkResultReturn = ({ fn, err, finalFn = () => {} }) => {
+  try {
+    return createOk(fn());
+  } catch (e) {
+    return err(e);
+  } finally {
+    finalFn();
+  }
+};
+const checkResultVoid = ({ fn, err, finalFn = () => {} }) => {
+  try {
+    fn();
+    return createOk(UNIT);
+  } catch (e) {
+    return err(e);
+  } finally {
+    finalFn();
+  }
+};
+const checkPromiseReturn = async ({ fn, err, finalFn = () => {} }) => {
+  try {
+    return createOk(await fn());
+  } catch (e) {
+    return err(e);
+  } finally {
+    finalFn();
+  }
+};
 //#endregion
 export {
+  UNIT,
+  checkPromiseReturn,
+  checkPromiseVoid,
+  checkResultReturn,
+  checkResultVoid,
   classMerger,
+  createErr,
+  createOk,
   envParse,
+  isErr,
   isKeyOf,
   isNull,
+  isOk,
   isOmitObject,
   isUndefined,
   omitElementObject,
   optionUtility,
-  resultUtility,
 };

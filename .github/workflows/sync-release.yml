@@ -1,4 +1,4 @@
-name: Sync Release
+name: Sync Release Branch
 
 on:
   pull_request:
@@ -27,5 +27,20 @@ jobs:
           fetch-depth: 0
           ref: ${{ github.event.pull_request.merge_commit_sha }}
 
-      - name: Push merged release commit to release branch
-        run: git push origin HEAD:release --force-with-lease
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.12.0
+          cache: pnpm
+
+      - name: Enable pnpm
+        run: corepack enable
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build release artifacts
+        run: pnpm build
+
+      - name: Prepare release branch contents
+        run: node --experimental-strip-types ./scripts/prepare-release-branch.ts

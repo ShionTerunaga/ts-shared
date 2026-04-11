@@ -29,7 +29,8 @@
     "test": "vp test",
     "changeset": "vp exec changeset",
     "version-packages": "vp exec changeset version",
-    "release:finalize": "vp pack && node --experimental-strip-types ./scripts/finalize-release.ts",
+    "release:prepare-branch": "node --experimental-strip-types ./scripts/prepare-release-branch.ts",
+    "release:publish": "node --experimental-strip-types ./scripts/publish-release.ts",
     "hooks:install": "vp exec lefthook install"
   },
   "devDependencies": {

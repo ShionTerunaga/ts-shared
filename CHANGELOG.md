@@ -1,5 +1,11 @@
 # ts-shared
 
+## 1.1.2
+
+### Patch Changes
+
+- [`ea42d1c`](https://github.com/ShionTerunaga/ts-shared/commit/ea42d1c8c7e95b7535c1bd5f0c7c9d068a5406ca) Thanks [@github-actions[bot]](https://github.com/github-actions%5Bbot%5D)! - I've set it up so that changes are automatically pushed to the release branch and release notes are generated automatically. This isn't really related to the main project.
+
 ## 1.1.1
 
 ### Patch Changes

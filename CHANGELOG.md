@@ -1,5 +1,15 @@
 # ts-shared
 
+## 1.1.0
+
+### Minor Changes
+
+- [#6](https://github.com/ShionTerunaga/ts-shared/pull/6) [`315acb5`](https://github.com/ShionTerunaga/ts-shared/commit/315acb5988bcdbe688681fcb9d0b8ce91f55b235) Thanks [@ShionTerunaga](https://github.com/ShionTerunaga)! - Add reusable error classes (BaseError, HTTP errors, SchemeError, ValidationError)
+
+### Patch Changes
+
+- [`856772f`](https://github.com/ShionTerunaga/ts-shared/commit/856772fa0378309feaceb4bb85899ff48c19bfc9) Thanks [@github-actions[bot]](https://github.com/github-actions%5Bbot%5D)! - Update the release workflow to publish from the built `release` branch artifacts and generate tags and release notes from the latest changelog on `main`.
+
 ## 1.0.2
 
 ### Patch Changes

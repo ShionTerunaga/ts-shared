@@ -1,31 +1,27 @@
 name: Sync Release Branch
 
 on:
-  pull_request:
-    types:
-      - closed
+  push:
     branches:
       - main
+  workflow_dispatch:
 
 permissions:
   contents: write
 
 concurrency:
-  group: sync-release-${{ github.event.pull_request.number }}
+  group: sync-release-${{ github.ref }}
   cancel-in-progress: false
 
 jobs:
   sync-release:
-    if: >
-      github.event.pull_request.merged == true &&
-      github.event.pull_request.head.ref == 'changeset-release/main'
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout merged main
+      - name: Checkout main
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          ref: ${{ github.event.pull_request.merge_commit_sha }}
+          ref: main
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -37,11 +33,30 @@ jobs:
         with:
           version: 10.32.1
 
+      - name: Resolve release version
+        id: release
+        run: |
+          VERSION=$(node -p "require('./package.json').version")
+          TAG="v${VERSION}"
+          if git ls-remote --exit-code --tags origin "refs/tags/${TAG}" >/dev/null 2>&1; then
+            echo "should_publish=false" >> "$GITHUB_OUTPUT"
+            echo "version=${VERSION}" >> "$GITHUB_OUTPUT"
+            echo "tag=${TAG}" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          echo "should_publish=true" >> "$GITHUB_OUTPUT"
+          echo "version=${VERSION}" >> "$GITHUB_OUTPUT"
+          echo "tag=${TAG}" >> "$GITHUB_OUTPUT"
+
       - name: Install dependencies
+        if: steps.release.outputs.should_publish == 'true'
         run: pnpm install --frozen-lockfile
 
       - name: Build release artifacts
+        if: steps.release.outputs.should_publish == 'true'
         run: pnpm build
 
       - name: Prepare release branch contents
+        if: steps.release.outputs.should_publish == 'true'
         run: node --experimental-strip-types ./scripts/prepare-release-branch.ts

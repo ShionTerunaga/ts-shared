@@ -30,8 +30,7 @@
     "changeset": "vp exec changeset",
     "version-packages": "vp exec changeset version",
     "release:prepare-branch": "node --experimental-strip-types ./scripts/prepare-release-branch.ts",
-    "release:publish": "node --experimental-strip-types ./scripts/publish-release.ts",
-    "hooks:install": "vp exec lefthook install"
+    "release:publish": "node --experimental-strip-types ./scripts/publish-release.ts"
   },
   "devDependencies": {
     "@changesets/changelog-github": "^0.6.0",
@@ -39,7 +38,6 @@
     "@commitlint/cli": "^20.5.0",
     "@commitlint/config-conventional": "^20.5.0",
     "@typescript/native-preview": "7.0.0-dev.20260323.1",
-    "lefthook": "^2.1.4",
     "vite-plus": "catalog:"
   },
   "engines": {

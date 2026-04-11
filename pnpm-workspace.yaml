@@ -8,7 +8,6 @@ catalog:
   "@commitlint/config-conventional": ^20.5.0
   "@types/node": ^24
   "@typescript/native-preview": 7.0.0-dev.20260323.1
-  lefthook: ^2.1.4
   typescript: ^5
   vite: npm:@voidzero-dev/vite-plus-core@latest
   vite-plus: latest

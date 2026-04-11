@@ -1,5 +1,11 @@
 # ts-shared
 
+## 1.1.1
+
+### Patch Changes
+
+- [`99f1dc8`](https://github.com/ShionTerunaga/ts-shared/commit/99f1dc87fa4e5f427ad3d41532aaf6c1665f784e) Thanks [@github-actions[bot]](https://github.com/github-actions%5Bbot%5D)! - Slim down the release branch package manifest so published artifacts keep only the fields needed for distribution and remain package-manager agnostic.
+
 ## 1.1.0
 
 ### Minor Changes

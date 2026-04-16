@@ -1,5 +1,11 @@
 # ts-shared
 
+## 1.1.3
+
+### Patch Changes
+
+- [`121e175`](https://github.com/ShionTerunaga/ts-shared/commit/121e17508ffc8656ee52481d2e3c5e8c4a6b5bf5) Thanks [@github-actions[bot]](https://github.com/github-actions%5Bbot%5D)! - I have exported the `Unit` type.
+
 ## 1.1.2
 
 ### Patch Changes

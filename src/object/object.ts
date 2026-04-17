@@ -1,23 +1,5 @@
 import type { Dict } from "../types/object";
 
-/**
- * オブジェクトから要素を省く関数（非破壊）
- * - 元オブジェクトは変更しません
- * - `as` / `any` を使わず、型ガードでキーを検証します
- */
-export function isKeyOf<T extends object>(key: PropertyKey, obj: T): key is keyof T {
-  return typeof key === "string" || typeof key === "number" || typeof key === "symbol"
-    ? key in obj
-    : false;
-}
-
-export function isOmitObject<T extends object, S extends keyof T>(
-  currentObj: Dict<unknown>,
-  keys: S[],
-): currentObj is Omit<T, S> {
-  return keys.every((key) => !Object.keys(currentObj).includes(String(key)));
-}
-
 export function omitElementObject<T extends object, S extends keyof T>(
   obj: T,
   keys: S[],
@@ -28,7 +10,7 @@ export function omitElementObject<T extends object, S extends keyof T>(
 
   const typedResult: Dict<unknown> = {};
   for (const [k, v] of entries) {
-    if (isKeyOf(k, obj)) {
+    if (k in obj) {
       typedResult[k] = v;
     }
   }

@@ -1,5 +1,11 @@
 # ts-shared
 
+## 1.1.4
+
+### Patch Changes
+
+- [`40fe34b`](https://github.com/ShionTerunaga/ts-shared/commit/40fe34b647d99d0407b73ade181b69dccedeb201) Thanks [@github-actions[bot]](https://github.com/github-actions%5Bbot%5D)! - I removed the unnecessary functions.
+
 ## 1.1.3
 
 ### Patch Changes

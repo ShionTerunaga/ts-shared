@@ -35,5 +35,8 @@ export { isNull, isUndefined } from "./common/is";
 export { omitElementObject } from "./object/object";
 export { envParse } from "./non-nullable/env-parse";
 export { optionUtility, type Option } from "./non-nullable/option";
+export * from "./non-nullable/result/result-core";
+export * from "./non-nullable/result/result-process";
+
 export { resultUtility, type Result, type Unit } from "./non-nullable/result";
 export type { Dict, Without } from "./types/object";

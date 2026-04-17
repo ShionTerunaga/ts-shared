@@ -1,0 +1,28 @@
+{
+  "name": "ts-shared",
+  "version": "1.1.4",
+  "description": "Shared TypeScript utilities with generated type definitions.",
+  "homepage": "https://github.com/ShionTerunaga/ts-shared#readme",
+  "bugs": {
+    "url": "https://github.com/ShionTerunaga/ts-shared/issues"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ShionTerunaga/ts-shared.git"
+  },
+  "files": [
+    "dist",
+    "LICENSE",
+    "package.json"
+  ],
+  "type": "module",
+  "types": "./dist/index.d.mts",
+  "exports": {
+    ".": "./dist/index.mjs",
+    "./package.json": "./package.json"
+  },
+  "engines": {
+    "node": ">=22.12.0"
+  }
+}

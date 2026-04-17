@@ -168,10 +168,6 @@ describe("result", () => {
 
     expect(res.kind).toBe("ok");
 
-    if (res.kind === "ng") {
-      throw new Error("Expected to be Ok, but got Err");
-    }
-
     expect((res as any).value).toBe("async");
   });
 
@@ -184,10 +180,6 @@ describe("result", () => {
     });
 
     expect(res.kind).toBe("ng");
-
-    if (res.kind === "ok") {
-      throw new Error("Expected to be Err, but got Ok");
-    }
 
     expect((res as any).err).toBe("err");
   });
@@ -230,11 +222,7 @@ describe("result", () => {
 
     expect(res.kind).toBe("ok");
 
-    if (res.kind === "ng") {
-      throw new Error("Expected to be Ok, but got Err");
-    }
-
-    expect(res.value).toBe(UNIT);
+    expect((res as any).value).toBe(UNIT);
   });
 
   it("checkPromiseVoid は成功時でも finalFn を呼ぶ", async () => {

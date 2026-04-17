@@ -43,7 +43,7 @@ interface CheckPromiseVoid<E> {
 
 const UNIT_SYMBOL = Symbol("UNIT_SYMBOL");
 
-interface Unit {
+export interface Unit {
   readonly _unit: typeof UNIT_SYMBOL;
 }
 

@@ -14,5 +14,5 @@
     "strict": true,
     "skipLibCheck": true
   },
-  "include": ["src", "scripts", "vite.config.ts", "commitlint.config.mjs", "__test__"]
+  "include": ["src", "scripts", "vite.config.ts", "__test__"]
 }
